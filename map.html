@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>Post Office and Petrol Statiol</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      #map {
+        height: 100%;
+      }
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+       }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+      <script>
+        var map;
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 16,
+            center: new google.maps.LatLng(24.178135, 120.642209),
+            mapTypeId: 'roadmap'
+         });
+
+         var icons = {
+           post: {
+             icon:  'post.png'
+           },
+           petrol: {
+             icon: 'petrol.png'
+           }
+         };
+        var features = [
+            {
+              position: new google.maps.LatLng(24.172172, 120.645424),
+              type: 'petrol',
+              address: 'No. 341, Section 2, Henan Road, Xitun District, Taichung City, 407'
+         }, {
+              position: new google.maps.LatLng(24.171191, 120.644021),
+              type: 'petrol',
+              address: 'No. 211號, Section 2, Qinghai Road, Xitun District, Taichung City, 407'
+         }, {
+              position: new google.maps.LatLng(24.179337, 120.634552),
+              type: 'petrol',
+              address: 'No. 1286, Section 2, Huanzhong Road, Xitun District, Taichung City, 407'
+         }, {
+              position: new google.maps.LatLng(24.176694, 120.637471),
+              type: 'post',
+              address: 'No. 130號, Section 3, Liming Road, Xitun District, Taichung City, 407'
+         }, {
+              position: new google.maps.LatLng(24.175141, 120.649315),
+              type: 'post',
+              address: '407, Taichung City, Xitun District, 河南路2段268號'
+         }, {
+               position: new google.maps.LatLng(24.180063, 120.632482),
+               type: 'petrol',
+               address: 'No. 110號, Fuke Road, Xitun District, Taichung City, 407'
+              }
+         ];
+// Create markers.
+                features.forEach(function(feature) {
+	  var marker = new google.maps.Marker({
+	    position: feature.position,
+	    icon: icons[feature.type].icon,
+	    map: map
+                 });
+
+                  var contentString = '<div>'  + '<h3>' + feature.address + '</h3>' + '</div>'
+		
+	var infowindow = new google.maps.InfoWindow({ 
+		               content: contentString
+		               });
+	marker.addListener('mouseover', function() {
+		                   infowindow.open(map, marker);
+		                });
+	});
+
+     }
+     </script>
+     <script async defer
+         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWwPDMKp2kABUPOHJky-          AHxBHrvmbDoRs&callback=initMap">
+       </script>
+  </body>
+</html>
